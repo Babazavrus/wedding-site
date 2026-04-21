@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wedding Invitation</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+
+  <!-- AOS Animation -->
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{font-family:'Montserrat',sans-serif;color:#444;background:#faf9f7}
+
+    section{padding:100px 20px;text-align:center}
+
+    h1,h2{font-family:'Playfair Display',serif}
+
+    /* HERO */
+    .hero{
+      height:100vh;
+      background:url('https://picsum.photos/1920/1080?grayscale') center/cover no-repeat;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      color:white;
+      position:relative;
+    }
+
+    .hero::after{
+      content:"";
+      position:absolute;
+      top:0;left:0;width:100%;height:100%;
+      background:rgba(0,0,0,0.3);
+    }
+
+    .hero-content{position:relative;z-index:2}
+
+    .hero h1{font-size:64px;letter-spacing:2px}
+    .hero p{font-size:22px;margin-top:10px}
+
+    .countdown{font-size:28px;margin-top:20px}
+
+    /* DIVIDER */
+    .divider{
+      width:80px;height:2px;background:#ccc;margin:20px auto
+    }
+
+    /* TIMELINE */
+    .timeline{
+      max-width:600px;margin:auto;text-align:left
+    }
+    .timeline div{
+      margin:15px 0;
+      padding-left:20px;
+      border-left:2px solid #ccc
+    }
+
+    /* GALLERY */
+    .gallery{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:15px;
+    }
+    .gallery img{
+      width:100%;
+      border-radius:12px;
+      transition:0.3s;
+    }
+    .gallery img:hover{transform:scale(1.05)}
+
+    /* MAP */
+    iframe{width:100%;height:350px;border:none;border-radius:12px}
+
+    /* FORM */
+    form{max-width:400px;margin:auto}
+    input,select,button{
+      width:100%;
+      padding:12px;
+      margin:10px 0;
+      border-radius:8px;
+      border:1px solid #ddd;
+      font-size:14px;
+    }
+
+    button{
+      background:#222;
+      color:white;
+      border:none;
+      cursor:pointer;
+      transition:0.3s;
+    }
+    button:hover{background:#444}
+
+    /* SMALL DETAILS */
+    p{max-width:600px;margin:auto;line-height:1.6}
+
+  </style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-content" data-aos="fade-up">
+    <h1>Viktoria & Denys</h1>
+    <p>27.06.2026</p>
+    <div class="countdown" id="countdown"></div>
+  </div>
+</section>
+
+<section data-aos="fade-up">
+  <h2>Наша історія</h2>
+  <div class="divider"></div>
+  <p>Тут треба вашу історію бахнуть</p>
+</section>
+
+<section data-aos="fade-up">
+  <h2>Програма дня</h2>
+  <div class="divider"></div>
+  <div class="timeline">
+    <div>00:00 — Церемонія</div>
+    <div>00:00 — Банкет</div>
+    <div>00:00 — Вечірка</div>
+  </div>
+</section>
+
+<section data-aos="fade-up">
+  <h2>Галерея</h2>
+  <div class="divider"></div>
+  <div class="gallery">
+    <img src="https://picsum.photos/300/200">
+    <img src="https://picsum.photos/301/200">
+    <img src="https://picsum.photos/302/200">
+  </div>
+</section>
+
+<section data-aos="fade-up">
+  <h2>Локація</h2>
+  <div class="divider"></div>
+  <iframe src="https://maps.google.com/maps?q=kyiv&t=&z=13&ie=UTF8&iwloc=&output=embed"></iframe>
+</section>
+
+<section data-aos="fade-up">
+  <h2>Підтвердження</h2>
+  <div class="divider"></div>
+  <form>
+    <input type="text" placeholder="Ваше ім'я">
+    <select>
+      <option>Прийду</option>
+      <option>Не прийду</option>
+    </select>
+    <button type="submit">Відправити</button>
+  </form>
+</section>
+
+<!-- Scripts -->
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script>
+  AOS.init({duration:1000,once:true});
+
+  const targetDate = new Date(" June 27, 2026 12:00:00").getTime();
+
+  setInterval(() => {
+    const now = new Date().getTime();
+    const diff = targetDate - now;
+
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff % (1000*60*60*24))/(1000*60*60));
+    const minutes = Math.floor((diff % (1000*60*60))/(1000*60));
+
+    document.getElementById("countdown").innerHTML =
+      `${days} днів ${hours} год ${minutes} хв`;
+  }, 1000);
+</script>
+
+</body>
+</html>
